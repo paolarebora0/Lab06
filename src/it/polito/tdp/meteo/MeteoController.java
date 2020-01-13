@@ -66,7 +66,14 @@ public class MeteoController {
 	
 	@FXML
 	void doCalcolaSequenza(ActionEvent event) {
+		txtResult.clear();
+		Month m = boxMese.getValue();
 		
+		if(m!=null) {
+			List<Citta> best = model.calcolaSequenza(m);
+			txtResult.appendText("Sequenza ottima per il mese "+m.toString());
+			txtResult.appendText(best+"\n");
+		}
 		
 	}
 

@@ -39,7 +39,11 @@ public class Model {
 		List<Citta> parziale = new ArrayList<Citta>();
 		this.best = null;
 		
-		//Calcolo del costo
+		MeteoDAO dao = new MeteoDAO();
+		
+		for(Citta c: leCitta) {
+			c.setRilevamenti(dao.getAllRilevamentiLocalitaMese(mese, c));
+		}
 		
 		cerca(parziale, 0);
 		
@@ -55,6 +59,9 @@ public class Model {
 			
 			//Deve calcolare il costo
 			Double costo = calcolaCosto(parziale);
+			
+			if(best == null || costo < calcolaCosto(best))			
+				best = new ArrayList<Citta>(parziale);
 			
 			//Aggiornamento del costo ottimale
 			
